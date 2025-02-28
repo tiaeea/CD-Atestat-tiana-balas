@@ -73,8 +73,25 @@
             <a href="./contact.html"><img src="./phone-thin-128.webp" width="39px" height="38.5px"></a>
         </div>
     </nav>
-    <h1>femei</h1>
 
+    <form name="submit-to-google-sheet">
+        <input name="name" type="text" placeholder="name" required>
+        <input name="email" type="email" placeholder="email" required>
+        <input name="text" type="text" placeholder="text" required>
+        <button type="submit">Send</button>
+      </form>
+      
+      <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyYigJ8d3FL9z1AB2UODmc5rKAEDSB2hsJztnDh2y9NtwVlcUAR89l5cf8XmAbmTfd9jQ/exec'
+        const form = document.forms['submit-to-google-sheet']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => console.log('Success!', response))
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
 
 </body>
 </html>
